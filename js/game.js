@@ -4,8 +4,8 @@ function begin()
 {
     var container = new PIXI.Container();
     var renderer = PIXI.autoDetectRenderer(
-        640,
-        480,
+        800,
+        600,
         {view: document.getElementById('game-canvas')}
     );
     
