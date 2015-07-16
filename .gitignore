@@ -1,0 +1,6 @@
+# Build folders.
+public/js
+typings
+
+# Google JS compiler.
+compiler.jar
