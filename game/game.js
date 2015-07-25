@@ -10,13 +10,12 @@ Game.steprate = 60;
  */
 Game.begin = function ()
 {
+    var canvas = document.getElementById('game-canvas');
+    
     // Initialise pixi.js objects, including embedding the renderer in the HTML canvas.
     Game.container = new PIXI.Container();
-    Game.renderer = PIXI.autoDetectRenderer(
-        800,
-        600,
-        {view: document.getElementById('game-canvas')}
-    );
+    Game.renderer = PIXI.autoDetectRenderer(1, 1, {view: canvas});
+    Game.resize(canvas);
     
     // Bootstrap the render loop.
     requestAnimationFrame(Game.render);
@@ -31,7 +30,7 @@ Game.render = function ()
 {
     Game.renderer.render(Game.container);
     
-    requestAnimationFrame(Game.update);
+    requestAnimationFrame(Game.render);
 }
 
 /**
@@ -43,3 +42,13 @@ Game.step = function ()
     
     setTimeout(Game.step, 1000 / Game.steprate);
 }
+
+/**
+ * Resize the renderer based on the broswer window size.
+ */
+ Game.resize = function (canvas)
+ {
+     Game.renderer.resize(canvas.width, canvas.height);
+     Game.renderer.view.style.width = canvas.width + 'px';
+     Game.renderer.view.style.height = canvas.height + 'px';
+ }
