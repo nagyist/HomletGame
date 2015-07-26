@@ -16,6 +16,7 @@ Game.begin = function ()
     Game.container = new PIXI.Container();
     Game.renderer = PIXI.autoDetectRenderer(1, 1, {view: canvas});
     Game.resize();
+    window.addEventListener("resize", Game.resize, false); 
     
     // Bootstrap the render loop.
     requestAnimationFrame(Game.render);
