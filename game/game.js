@@ -15,7 +15,7 @@ Game.begin = function ()
     // Initialise pixi.js objects, including embedding the renderer in the HTML canvas.
     Game.container = new PIXI.Container();
     Game.renderer = PIXI.autoDetectRenderer(1, 1, {view: canvas});
-    Game.resize(canvas);
+    Game.resize();
     
     // Bootstrap the render loop.
     requestAnimationFrame(Game.render);
@@ -46,9 +46,10 @@ Game.step = function ()
 /**
  * Resize the renderer based on the broswer window size.
  */
- Game.resize = function (canvas)
- {
-     Game.renderer.resize(canvas.width, canvas.height);
-     Game.renderer.view.style.width = canvas.width + 'px';
-     Game.renderer.view.style.height = canvas.height + 'px';
+ Game.resize = function ()
+ {     
+     Game.renderer.resize(window.innerWidth, window.innerHeight);
+     Game.renderer.view.style.width = window.innerWidth + 'px';
+     Game.renderer.view.style.height = window.innerHeight + 'px';
+     console.log(window.innerWidth);
  }
