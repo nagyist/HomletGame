@@ -1,14 +1,11 @@
 {
     "version": "0.1.0",
-    "command": "java",
-    "args": [
-        "-jar",
-        "compiler.jar",
-        "game/game.js",
-        "--js_output_file",
-        "public/js/game.min.js"
-    ]
-    "isShellCommand": true,
-    "showOutput": "never",
-    "isBuildTask": true
+    "command": "tsc", 
+    "showOutput": "silent",
+    "windows": {
+        "command": "tsc.exe"
+    },
+    "args": ["game/game.ts"],
+    "isBuildTask": "true",
+    "problemMatcher": "$tsc"
 }
