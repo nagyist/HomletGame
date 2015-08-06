@@ -2,8 +2,7 @@
 
 class State extends PIXI.Container
 {    
-    constructor()
-    {
+    constructor() {
         super();
     }
     
@@ -15,8 +14,7 @@ class State extends PIXI.Container
     /**
      * Called once per game logic loop.
      */
-    step(delta : number)
-    {
+    step(delta : number) {
         // TODO: step entities individually.
     }
 }
