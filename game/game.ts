@@ -25,11 +25,13 @@ class Game
     /**
      * Set up the game state and initialise pixi.js.
      */
-    constructor() {
+    constructor(state? : State) {
         var canvas : HTMLElement = document.getElementById('game-canvas');
         
         // Initialise pixi.js objects, including embedding the renderer in the HTML canvas.
-        this.setState(new State());
+        if (state != null) {
+            this.setState(new State());
+        }
         this.renderer = PIXI.autoDetectRenderer(1, 1, {view: <HTMLCanvasElement> canvas});
         this.resize();
         window.addEventListener("resize", this.resize.bind(this), false);
@@ -44,7 +46,9 @@ class Game
      * Render any objects in the pixi state.
      */
     render() {
-        this.renderer.render(this.state);
+        if (this.hasState()) {
+            this.renderer.render(this.state);
+        }
         
         requestAnimationFrame(this.render.bind(this));
     }
@@ -53,7 +57,9 @@ class Game
      * Main game logic loop.
      */
     step() {
-        this.state.step(1000 / this.steprate);
+        if (this.hasState()) {
+            this.state.step(1000 / this.steprate);
+        }
         
         setTimeout(this.step.bind(this), 1000 / this.steprate);
     }
@@ -69,11 +75,18 @@ class Game
      }
      
      /**
+      * Returns true if a state is currently loaded.
+      */
+     hasState() : boolean {
+         return (this.state != null);
+     }
+     
+     /**
       * Change the currently active game container, allowing the
       * previous container to clean up its state.
       */
      setState(state : State) {
-         if (this.state != null) {
+         if (this.hasState()) {
              // Clean up the previous state.
              this.state.destroy(true);
          }
