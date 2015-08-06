@@ -85,5 +85,16 @@ class Game
 }
 
 
-// Main entry point.
-var game : Game = new Game();
+/**
+ * Variable referencing the Game object.
+ */
+var game : Game;
+
+
+/**
+ * Main entry point.
+ */
+function begin()
+{
+    game = new Game();
+}
