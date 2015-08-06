@@ -83,3 +83,7 @@ class Game
          this.container = container;
      }
 }
+
+
+// Main entry point.
+var game : Game = new Game();
