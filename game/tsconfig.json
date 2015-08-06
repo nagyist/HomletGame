@@ -2,6 +2,6 @@
     "compilerOptions": {
         "noImplicitAny": true,
         "removeComments": true,
-        "out": "public/js/game.js"
+        "out": "public/js/homletgame.js"
     }    
 }
