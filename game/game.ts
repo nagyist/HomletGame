@@ -33,12 +33,12 @@ class Game
         this.setContainer(new PIXI.Container());
         this.renderer = PIXI.autoDetectRenderer(1, 1, {view: <HTMLCanvasElement> canvas});
         this.resize();
-        window.addEventListener("resize", this.resize, false);
+        window.addEventListener("resize", this.resize.bind(this), false);
         
         // Bootstrap the render loop.
-        requestAnimationFrame(this.render);
+        requestAnimationFrame(this.render.bind(this));
         // Bootstrap the logic update loop.
-        setTimeout(this.step, 1000 / this.steprate);
+        setTimeout(this.step.bind(this), 1000 / this.steprate);
     }
     
     /**
@@ -48,7 +48,7 @@ class Game
     {
         this.renderer.render(this.container);
         
-        requestAnimationFrame(this.render);
+        requestAnimationFrame(this.render.bind(this));
     }
     
     /**
@@ -58,7 +58,7 @@ class Game
     {
         // TODO: Game logic goes here.
         
-        setTimeout(this.step, 1000 / this.steprate);
+        setTimeout(this.step.bind(this), 1000 / this.steprate);
     }
     
     /**
