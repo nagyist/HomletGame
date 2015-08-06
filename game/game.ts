@@ -8,11 +8,11 @@ class Game
     private steprate : number = 60;
     
     /**
-     * Currently loaded game container.
-     * Only this container will be updated and rendered while active.
-     * The container should be changed using the setContainer method.
+     * Currently loaded game state.
+     * Only this state will be updated and rendered while active.
+     * The state should be changed using the setState method.
      */
-    private container : PIXI.Container;
+    private state : State;
     
     /**
      * The renderer object is tied to the canvas, and is used to draw the scene.
@@ -30,7 +30,7 @@ class Game
         var canvas : HTMLElement = document.getElementById('game-canvas');
         
         // Initialise pixi.js objects, including embedding the renderer in the HTML canvas.
-        this.setContainer(new PIXI.Container());
+        this.setState(new State());
         this.renderer = PIXI.autoDetectRenderer(1, 1, {view: <HTMLCanvasElement> canvas});
         this.resize();
         window.addEventListener("resize", this.resize.bind(this), false);
@@ -42,11 +42,11 @@ class Game
     }
     
     /**
-     * Render any objects in the pixi container.
+     * Render any objects in the pixi state.
      */
     render()
     {
-        this.renderer.render(this.container);
+        this.renderer.render(this.state);
         
         requestAnimationFrame(this.render.bind(this));
     }
@@ -56,7 +56,7 @@ class Game
      */
     step()
     {
-        // TODO: Game logic goes here.
+        this.state.step(1000 / this.steprate);
         
         setTimeout(this.step.bind(this), 1000 / this.steprate);
     }
@@ -76,11 +76,18 @@ class Game
       * Change the currently active game container, allowing the
       * previous container to clean up its state.
       */
-     setContainer(container : PIXI.Container)
+     setState(state : State)
      {
-         // TODO: Create a subclass of container to allow for update functionality etc.
+         if (this.state != null) {
+             // Clean up the previous state.
+             this.state.destroy(true);
+         }
          
-         this.container = container;
+         // Set the new state.
+         this.state = state;
+         
+         // Notify the state it has been loaded.
+         this.state.load();
      }
 }
 
