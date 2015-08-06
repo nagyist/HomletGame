@@ -1,6 +1,6 @@
-/// <reference path="../typings/pixi/pixi.d.ts"/>
-/// <reference path="Game.ts"/>
-/// <reference path="State.ts"/>
+/// <reference path="typings/pixi/pixi.d.ts"/>
+/// <reference path="HG/Game.ts"/>
+/// <reference path="HG/State.ts"/>
 
 class TestState extends HG.State
 {
