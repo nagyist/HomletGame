@@ -91,6 +91,7 @@ module HG
          setState(state : State) : void {
              if (this.hasState()) {
                  // Clean up the previous state.
+                 this.state.removed();
                  this.state.destroy(true);
              }
              
@@ -98,7 +99,7 @@ module HG
              this.state = state;
              
              // Notify the state it has been loaded.
-             this.state.load();
+             this.state.added();
          }
     }
 }
