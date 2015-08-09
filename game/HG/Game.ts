@@ -48,7 +48,7 @@ module HG
         /**
          * Render any objects in the pixi state.
          */
-        render() {
+        render() : void {
             if (this.hasState()) {
                 this.renderer.render(this.state);
             }
@@ -59,7 +59,7 @@ module HG
         /**
          * Main game logic loop.
          */
-        step() {
+        step() : void {
             if (this.hasState()) {
                 this.state.step(1000 / this.steprate);
             }
@@ -70,7 +70,7 @@ module HG
         /**
          * Resize the renderer based on the broswer window size.
          */
-         resize() {
+         resize() : void {
              this.renderer.resize(window.innerWidth, window.innerHeight);
              this.renderer.view.style.width = window.innerWidth + 'px';
              this.renderer.view.style.height = window.innerHeight + 'px';
@@ -88,7 +88,7 @@ module HG
           * Change the currently active game container, allowing the
           * previous container to clean up its state.
           */
-         setState(state : State) {
+         setState(state : State) : void {
              if (this.hasState()) {
                  // Clean up the previous state.
                  this.state.destroy(true);
