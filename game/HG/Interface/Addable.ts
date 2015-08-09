@@ -3,8 +3,8 @@ module HG
     export module Interface
     {
         /**
-         * All object classes which are updated regularly by the game logic
-         * loop should implement the Steppable interface.
+         * Object classes which can be added to and removed from containers should
+         * implement Addable if they require to run code during these events.
          */
         export interface Addable
         {
