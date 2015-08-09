@@ -1,6 +1,6 @@
 module HG
 {
-    module Interface
+    export module Interface
     {
         /**
          * All object classes which are updated regularly by the game logic
