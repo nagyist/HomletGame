@@ -6,7 +6,7 @@ class TestState extends HG.State
 {
     private graphic : PIXI.Graphics;
     
-    load() {
+    added() : void {
         this.graphic = new PIXI.Graphics();
         
         this.graphic.beginFill(0xFF0000);
@@ -19,7 +19,7 @@ class TestState extends HG.State
         this.addChild(this.graphic);
     }
     
-    step(delta : number) {
+    step(delta : number) : void {
         this.graphic.position.x += delta * 0.01;
         
         super.step(delta);
@@ -30,7 +30,7 @@ class TestState extends HG.State
 /**
  * Main entry point for test game.
  */
-function test() {
+function test() : void {
     var game : HG.Game = new HG.Game();
     game.setState(new TestState());
 }
