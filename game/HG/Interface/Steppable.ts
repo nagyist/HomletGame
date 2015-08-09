@@ -3,8 +3,8 @@ module HG
     module Interface
     {
         /**
-         * All objects which are updated regularly by the game logic loop should
-         * implement the Steppable interface.
+         * All object classes which are updated regularly by the game logic
+         * loop should implement the Steppable interface.
          */
         export interface Steppable
         {
