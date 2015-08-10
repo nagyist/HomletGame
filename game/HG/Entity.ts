@@ -1,10 +1,12 @@
 /// <reference path="../typings/pixi/pixi.d.ts"/>
 /// <reference path="Interface/Addable.ts"/>
+/// <reference path="Interface/Drawable.ts"/>
 /// <reference path="Interface/Steppable.ts"/>
 
 module HG
 {
-    export class Entity implements Interface.Steppable, Interface.Addable
+    export class Entity
+    implements Interface.Steppable, Interface.Addable, Interface.Drawable
     {
         /**
          * Called when the entity is added to a state.
@@ -21,5 +23,11 @@ module HG
          * or when the state is unloaded from the game.
          */
         removed() : void { /* Abstract method. */ };
+        
+        /**
+         * Return the PIXI DisplayObject associated with this Entity
+         * for drawing purposes. 
+         */
+        getDisplayObject() : PIXI.DisplayObject { /* Abstract method. */ return null; }
     }
 }
