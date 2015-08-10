@@ -18,5 +18,29 @@ module HG
              */
             removed() : void;
         }
+        
+        /**
+         * Object classes which support the adding of Addable objects
+         * should implement Container.
+         */
+         export interface Container
+         {
+             /**
+              * Add an Addable object to the container. Should throw an error
+              * if the object is already added to the container.
+              */
+             add(subject : Addable) : void;
+             
+             /**
+              * Remove an Addable object from the container. Should throw
+              * an error if the object is not already in the container.
+              */
+             remove(subject : Addable) : void;
+             
+             /**
+              * Return whether the container already contains an Addable object.
+              */
+             contains(subject : Addable) : boolean;
+         }
     }
 }
