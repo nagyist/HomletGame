@@ -33,7 +33,9 @@ module HG
          * Called once per game logic loop.
          */
         step(delta : number) : void {
-            // TODO: step entities individually.
+            for (var entity in this.entities) {
+                (<Entity> entity).step(delta);
+            }
         }
         
         /**
