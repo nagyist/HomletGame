@@ -38,9 +38,10 @@ module HG
              remove(subject : Addable) : void;
              
              /**
-              * Return whether the container already contains an Addable object.
+              * Return the index of the Addable in the Container. Return -1
+              * if it is not in the Container.
               */
-             contains(subject : Addable) : boolean;
+             indexOf(subject : Addable) : number;
          }
     }
 }

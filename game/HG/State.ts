@@ -3,6 +3,7 @@
 /// <reference path="Interface/Drawable.ts"/>
 /// <reference path="Interface/Steppable.ts"/>
 /// <reference path="Entity.ts"/>
+/// <reference path="Pair.ts"/>
 
 module HG
 {
@@ -10,9 +11,9 @@ module HG
     implements Interface.Steppable, Interface.Addable, Interface.Container, Interface.Drawer
     {
         /**
-         * Array to hold entities currently added to the state.
+         * Array to hold entities and display objects currently added to the state.
          */
-        private entities : Array<Entity>;
+        private entities : Array<Pair<Entity, PIXI.DisplayObject> >;
         
         
         /**
@@ -21,7 +22,7 @@ module HG
         constructor() {
             super();
             
-            this.entities = new Array<Entity>();
+            this.entities = new Array<Pair<Entity, PIXI.DisplayObject> >();
         }
         
         /**
@@ -33,8 +34,8 @@ module HG
          * Called once per game logic loop.
          */
         step(delta : number) : void {
-            for (var entity in this.entities) {
-                (<Entity> entity).step(delta);
+            for (var pair in this.entities) {
+                (<Entity> pair.first).step(delta);
             }
         }
         
@@ -48,10 +49,14 @@ module HG
          * Throw an error if the entity is already added.
          */
         add(subject : Entity) : void {
-            if (this.contains(subject)) {
+            if (this.indexOf(subject) > -1) {
                 throw Error("Attempted to add entity already added to state.")
             } else {
-                this.entities.push(subject);
+                var displayObject = subject.getDisplayObject();
+                this.addChild(displayObject);
+                
+                var pair = new Pair<Entity, PIXI.DisplayObject>(subject, displayObject);
+                this.entities.push(pair);
             }
         }
         
@@ -60,19 +65,27 @@ module HG
          * not added to the state.
          */
         remove(subject : Entity) : void {
-            if (!this.contains(subject)) {
+            if (this.indexOf(subject) < 0) {
                 throw Error("Attempted to remove an entity not added to state.")
             } else {
-                var index = this.entities.indexOf(subject);
+                var index = this.indexOf(subject);
+                this.removeChild(this.entities[index].second);
                 this.entities.splice(index, 1);
             }
         }
              
         /**
-         * Return whether the state already contains an entity.
+         * Return the index of the entity in the state.
          */
-        contains(subject : Entity) : boolean {
-            return (this.entities.indexOf(subject) > -1);
+        indexOf(subject : Entity) : number {
+            var index : number = -1;
+            for (var pair in this.entities) {
+                index++;
+                if (pair.first == subject) {
+                    return index
+                }
+            }
+            return -1;
         }
         
         /**
