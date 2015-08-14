@@ -68,7 +68,7 @@ module HG
             if (this.indexOf(subject) < 0) {
                 throw Error("Attempted to remove an entity not added to state.")
             } else {
-                var index = this.indexOf(subject);
+                var index : number = this.indexOf(subject);
                 this.removeChild(this.entities[index].second);
                 this.entities.splice(index, 1);
             }
@@ -94,7 +94,17 @@ module HG
          * the state already. 
          */
         notifyDisplayObjectChanged(subject : Entity) : void {
-            // TODO: Implement this.
+            if (this.indexOf(subject) < 0) {
+                throw Error("Cannot update display object for an entity not added to state.")
+            } else {
+                var index : number = this.indexOf(subject);
+                // Remove the old display object from the PIXI container.
+                this.removeChild(this.entities[index].second);
+                
+                var displayObject : PIXI.DisplayObject = subject.getDisplayObject();
+                this.addChild(displayObject);
+                this.entities[index].second = displayObject;
+            }
         }
     }
 }
