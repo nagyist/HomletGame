@@ -2,11 +2,14 @@
 /// <reference path="HG/Game.ts"/>
 /// <reference path="HG/State.ts"/>
 
-class TestState extends HG.State
+class TestEntity extends HG.Entity
 {
-    private graphic : PIXI.Graphics;
+    public graphic : PIXI.Graphics;
     
-    added() : void {
+    
+    constructor(pos : Point) {
+        super();
+        
         this.graphic = new PIXI.Graphics();
         
         this.graphic.beginFill(0xFF0000);
@@ -16,13 +19,28 @@ class TestState extends HG.State
         this.graphic.lineTo(0, 0);
         this.graphic.endFill();
         
-        this.addChild(this.graphic);
+        this.graphic.position.x = pos.first;
+        this.graphic.position.y = pos.second;
     }
     
     step(delta : number) : void {
         this.graphic.position.x += delta * 0.01;
         
         super.step(delta);
+    }
+    
+    getDisplayObject() : PIXI.DisplayObject {
+        return this.graphic;
+    }
+}
+
+class TestState extends HG.State
+{
+    private graphic : PIXI.Graphics;
+    
+    added() : void {
+        var entity : TestEntity = new TestEntity(new Point(50, 50));
+        this.add(entity);
     }
 }
 
