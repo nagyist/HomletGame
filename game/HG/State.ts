@@ -34,8 +34,8 @@ module HG
          * Called once per game logic loop.
          */
         step(delta : number) : void {
-            for (var pair in this.entities) {
-                (<Entity> pair.first).step(delta);
+            for (var i = 0; i < this.entities.length; i++) {
+                (<Entity> this.entities[i].first).step(delta);
             }
         }
         
