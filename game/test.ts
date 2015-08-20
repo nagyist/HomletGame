@@ -7,7 +7,7 @@ class TestEntity extends HG.Entity
     public graphic : PIXI.Graphics;
     
     
-    constructor(pos : Point) {
+    constructor(position : Point) {
         super();
         
         this.graphic = new PIXI.Graphics();
@@ -19,8 +19,8 @@ class TestEntity extends HG.Entity
         this.graphic.lineTo(0, 0);
         this.graphic.endFill();
         
-        this.graphic.position.x = pos.first;
-        this.graphic.position.y = pos.second;
+        this.graphic.position.x = position.x;
+        this.graphic.position.y = position.y;
     }
     
     step(delta : number) : void {
