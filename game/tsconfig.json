@@ -2,6 +2,7 @@
     "compilerOptions": {
         "noImplicitAny": true,
         "removeComments": true,
+        "target": "ES5",
         "out": "public/js/hgtest.js"
     }    
 }
