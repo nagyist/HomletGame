@@ -3,7 +3,7 @@
     "command": "tsc",
     "isShellCommand": true,
     "showOutput": "silent",
-    "args": ["-p", "game"],
+    "args": ["-p", "source"],
     "isBuildTask": "true",
     "problemMatcher": "$tsc"
 }
