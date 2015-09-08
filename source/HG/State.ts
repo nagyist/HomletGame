@@ -3,6 +3,7 @@
 /// <reference path="Interface/Drawable.ts"/>
 /// <reference path="Interface/Steppable.ts"/>
 /// <reference path="Entity.ts"/>
+/// <reference path="Game.ts"/>
 /// <reference path="Pair.ts"/>
 
 module HG
@@ -15,12 +16,19 @@ module HG
          */
         private entities : Array<Pair<Entity, PIXI.DisplayObject> >;
         
+        /**
+         * A reference to the game object which contains the state. 
+         */
+        game : HG.Game;
+        
         
         /**
          * Initialise data members.
          */
         constructor() {
             super();
+            
+            this.game = null;
             
             this.entities = new Array<Pair<Entity, PIXI.DisplayObject> >();
         }
