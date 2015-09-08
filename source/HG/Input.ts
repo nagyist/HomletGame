@@ -98,6 +98,13 @@ module HG
         }
         
         /**
+         * Convenience function for registering groups.
+         */
+        register(name : string, keys : Array<number>) : void {
+            this.registerGroup(new InputGroup(name, keys));
+        }
+        
+        /**
          * Update the status of all input groups which contain the relevant key.
          */
         private onKeyDownHandler(event : KeyboardEvent) : void {
