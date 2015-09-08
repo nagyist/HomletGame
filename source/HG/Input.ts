@@ -91,6 +91,40 @@ module HG
         }
         
         /**
+         * Return whether the requested group is down.
+         */
+        isDown(name : string) : boolean {
+            var group : InputGroup = this.findGroupByName(name); 
+            return (group.currentStatus == InputStatus.DOWN
+                 || group.currentStatus == InputStatus.PRESSED);
+        }
+        
+        /**
+         * Return whether the requested group is up.
+         */
+        isUp(name : string) : boolean {
+            var group : InputGroup = this.findGroupByName(name); 
+            return (group.currentStatus == InputStatus.UP
+                 || group.currentStatus == InputStatus.RELEASED);
+        }
+        
+        /**
+         * Return whether the requested group was just pressed.
+         */
+        wasPressed(name : string) : boolean {
+            var group : InputGroup = this.findGroupByName(name); 
+            return (group.currentStatus == InputStatus.PRESSED);
+        }
+        
+        /**
+         * Return whether the requested group was just released.
+         */
+        wasReleased(name : string) : boolean {
+            var group : InputGroup = this.findGroupByName(name); 
+            return (group.currentStatus == InputStatus.RELEASED);
+        }
+        
+        /**
          * Register a new input group with the input handler.
          */
         registerGroup(group : InputGroup) : void {
