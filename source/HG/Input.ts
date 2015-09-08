@@ -94,14 +94,38 @@ module HG
          * Register a new input group with the input handler.
          */
         registerGroup(group : InputGroup) : void {
+            if (this.findGroupByName(group.name))
+            {
+                throw Error("Cannot register input group with an existing name: " + group.name);
+            }
+            
             this.groups.push(group);
         }
         
         /**
          * Convenience function for registering groups.
          */
-        register(name : string, keys : Array<number>) : void {
+        register(name : string, keys : Array<number>) : void {            
             this.registerGroup(new InputGroup(name, keys));
+        }
+        
+        /**
+         * Find a registered group using its name as a key.
+         */
+        findGroupByName(name : string) : InputGroup {
+            // Cycle through all the registered groups.
+            for (var i : number = 0; i < this.groups.length; i++)
+            {
+                var group : InputGroup = this.groups[i];
+                if (group.name == name)
+                {
+                    // This is the correct group, as group names are unique.
+                    return group;
+                }
+            }
+            
+            // The group could not be found.
+            return null;
         }
         
         /**
