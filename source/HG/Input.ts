@@ -94,7 +94,8 @@ module HG
          * Return whether the requested group is down.
          */
         isDown(name : string) : boolean {
-            var group : InputGroup = this.findGroupByName(name); 
+            var group : InputGroup = this.findGroupByName(name);
+            if (!group) { return false; }
             return (group.currentStatus == InputStatus.DOWN
                  || group.currentStatus == InputStatus.PRESSED);
         }
@@ -103,7 +104,8 @@ module HG
          * Return whether the requested group is up.
          */
         isUp(name : string) : boolean {
-            var group : InputGroup = this.findGroupByName(name); 
+            var group : InputGroup = this.findGroupByName(name);
+            if (!group) { return false; } 
             return (group.currentStatus == InputStatus.UP
                  || group.currentStatus == InputStatus.RELEASED);
         }
@@ -112,7 +114,8 @@ module HG
          * Return whether the requested group was just pressed.
          */
         wasPressed(name : string) : boolean {
-            var group : InputGroup = this.findGroupByName(name); 
+            var group : InputGroup = this.findGroupByName(name);
+            if (!group) { return false; }
             return (group.currentStatus == InputStatus.PRESSED);
         }
         
@@ -120,7 +123,8 @@ module HG
          * Return whether the requested group was just released.
          */
         wasReleased(name : string) : boolean {
-            var group : InputGroup = this.findGroupByName(name); 
+            var group : InputGroup = this.findGroupByName(name);
+            if (!group) { return false; }
             return (group.currentStatus == InputStatus.RELEASED);
         }
         
