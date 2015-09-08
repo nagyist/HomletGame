@@ -43,8 +43,8 @@ module HG
             this.groups = new Array<InputGroup>();
             
             // Register keypress handlers.
-            window.addEventListener("onkeydown", this.onKeyDownHandler.bind(this));
-            window.addEventListener("onkeyup", this.onKeyUpHandler.bind(this));
+            window.addEventListener("keydown", this.onKeyDownHandler.bind(this));
+            window.addEventListener("keyup", this.onKeyUpHandler.bind(this));
         }
         
         /**
