@@ -1,4 +1,5 @@
 /// <reference path="../typings/pixi/pixi.d.ts"/>
+/// <reference path="Input.ts"/>
 /// <reference path="State.ts"/>
 
 module HG
@@ -24,6 +25,13 @@ module HG
          */
         private renderer : any;
         
+        /**
+         * The input object handles the Javascript input events and allows the state
+         * of registered input groups to be queried on the fly. Input groups are
+         * collections of keys which must be registered, and are tracked by the object.
+         */
+        input : HG.Input;
+        
         
         /**
          * Set up the game state and initialise pixi.js.
@@ -38,6 +46,8 @@ module HG
             this.renderer = PIXI.autoDetectRenderer(1, 1, {view: <HTMLCanvasElement> canvas});
             this.resize();
             window.addEventListener("resize", this.resize.bind(this), false);
+            
+            this.input = new Input();
             
             // Bootstrap the render loop.
             requestAnimationFrame(this.render.bind(this));
@@ -60,8 +70,12 @@ module HG
          * Main game logic loop.
          */
         step() : void {
+            var delta : number = 1000 / this.steprate;
+            
+            this.input.step(delta);
+            
             if (this.hasState()) {
-                this.state.step(1000 / this.steprate);
+                this.state.step(delta);
             }
             
             setTimeout(this.step.bind(this), 1000 / this.steprate);
