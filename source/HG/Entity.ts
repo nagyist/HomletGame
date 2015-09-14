@@ -9,6 +9,12 @@ module HG
     implements Interface.Steppable, Interface.Addable, Interface.Drawable
     {
         /**
+         * PIXI DisplayObject associated with this Entity for drawing purposes.
+         */
+        private displayObject : PIXI.DisplayObject;
+        
+        
+        /**
          * Called when the entity is added to a state.
          */
         added() : void { /* Abstract method. */ };
@@ -26,8 +32,18 @@ module HG
         
         /**
          * Return the PIXI DisplayObject associated with this Entity
-         * for drawing purposes. 
+         * for drawing purposes.
          */
-        getDisplayObject() : PIXI.DisplayObject { /* Abstract method. */ return null; }
+        getDisplayObject() : PIXI.DisplayObject {
+            return this.displayObject;
+        }
+        
+        /**
+         * Set the PIXI DisplayObject associated with this Entity
+         * for drawing purposes.
+         */
+        protected setDisplayObject(value : PIXI.DisplayObject) {
+            this.displayObject = value;
+        }
     }
 }
