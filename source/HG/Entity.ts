@@ -45,5 +45,47 @@ module HG
         protected setDisplayObject(value : PIXI.DisplayObject) {
             this.displayObject = value;
         }
+        
+        /**
+         * Return the x coordinate of the DisplayObject. If there
+         * is no DisplayObject assigned, this defaults to zero.
+         */
+        public get x() : number {
+            if (this.displayObject != null) {
+                return this.displayObject.x;
+            } else {
+                return 0;
+            }
+        }
+        
+        /**
+         * Set the x coordinate of the DisplayObject (if one is assigned).
+         */
+        public set x(value : number) {
+            if (this.displayObject != null) {
+                this.displayObject.x = value;
+            }
+        }
+        
+        /**
+         * Return the y coordinate of the DisplayObject. If there
+         * is no DisplayObject assigned, this defaults to zero.
+         */
+        public get y() : number {
+            if (this.displayObject != null) {
+                return this.displayObject.y;
+            } else {
+                return 0;
+            }
+        }
+        
+        /**
+         * Set the y coordinate of the DisplayObject (if one is assigned).
+         */
+        public set y(value : number) {
+            if (this.displayObject != null) {
+                this.displayObject.y = value;
+            }
+        }
     }
 }
