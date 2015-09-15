@@ -37,14 +37,23 @@ module HG
          */
         private groups : Array<InputGroup>;
         
+        /**
+         * Last recorded offset of the mouse cursor relative to the window origin.
+         */
+        private mouseOffset : Point;
+        
         
         constructor() {
             this._isFocussed = true;
             this.groups = new Array<InputGroup>();
+            this.mouseOffset = new Point(0, 0);
             
             // Register keypress handlers.
             window.addEventListener("keydown", this.onKeyDownHandler.bind(this));
             window.addEventListener("keyup", this.onKeyUpHandler.bind(this));
+            
+            // Register mouse handlers.
+            window.addEventListener("mousemove", this.onMouseMoveHandler.bind(this));
         }
         
         /**
@@ -88,6 +97,20 @@ module HG
          */
         get isFocussed() : boolean {
             return this._isFocussed;
+        }
+        
+        /**
+         * Return the x component of the mouse offset.
+         */
+        get mouseX() : number {
+            return this.mouseOffset.x;
+        }
+        
+        /**
+         * Return the y component of the mouse offset.
+         */
+        get mouseY() : number {
+            return this.mouseOffset.y;
         }
         
         /**
@@ -199,6 +222,14 @@ module HG
                     group.pendingStatus = InputStatus.RELEASED;
                 }
             }
+        }
+        
+        /**
+         * Update the stored mouse position when the mouse is moved.
+         */
+        private onMouseMoveHandler(event : MouseEvent) : void {
+            this.mouseOffset.x = event.offsetX;
+            this.mouseOffset.y = event.offsetY;
         }
     }
 }
